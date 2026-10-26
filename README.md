@@ -1,21 +1,27 @@
-An automated Python data pipeline that transforms unorganized media feeds, articles, and customer feedback into structured, quantitative insights using a hybrid approach of classic NLP and Large Language Models (LLMs). 
-Instead of relying on rigid, word-matching tools that fail to grasp context, this application automatically extracts deep semantic meaning, tracks emerging themes, and generates interactive corporate dashboards. 
-It bridges the gap between raw text streams and executive-ready marketing and PR intelligence.
+NLP Media Analytics
+
+An automated Python data pipeline that transforms unorganized media feeds, articles, and customer feedback into structured, quantitative insights using Large Language Models (LLMs).
+
+Instead of relying on rigid word-matching tools that fail to grasp context, the pipeline uses an LLM to extract context-aware sentiment and topics, turning raw text into data that marketing and PR teams can act on.
+
+Status: Early prototype. The core LLM analysis and visualization work today; the hybrid NLP preprocessing, interactive dashboards and local model support are planned. 
 
 Features
 
-Hybrid NLP Preprocessing: Leverages lightweight Python libraries for efficient text cleaning, tokenization, and metadata parsing to minimize downstream token usage and API costs.
-Structured AI Extraction: Utilizes the OpenAI API with strict JSON formatting to reliably capture context-aware sentiment analysis, complex topic classification, and high-accuracy keyword tracking.
-Production-Ready Data Integration: Automatically maps unstructured AI responses into structured pandas DataFrames, allowing for immediate aggregation, time-series analysis, and database storage.
-Dual-Layer Visualization: Generates publication-ready static charts with Seaborn and Matplotlib for formal reporting, alongside interactive, exploratory dashboards built with Plotly.
-Modular Pipeline Design: Built with fully decoupled modules for API handling, data cleaning, and visualization, making the architecture easily adaptable to local open-source models like Llama 3 via Ollama.
+Structured AI Extraction: Uses the OpenAI API (`gpt-4o-mini`) in strict JSON mode with `temperature=0` to reliably capture context-aware sentiment scores (-1.0 to 1.0) and topic classification.
+Validated Output: Sentiment values are clamped to the valid range, and topics outside the allowed list are rejected instead of silently corrupting the data.
+Prompt Injection Protection:Instructions and analyzed text are sent as separate messages, so the input cannot override the prompt.
+pandas Integration:AI responses are mapped into structured DataFrames, ready for aggregation and further analysis.
+Publication-Ready Charts: Seaborn and Matplotlib visualize the average sentiment per topic on a fixed scale with a neutral baseline.
+Modular Design: Analysis and visualization are separate, reusable functions.
 
 Tech Stack
 
 Language: Python 3.10+
-Data Engineering: pandas, NumPy
-AI & Semantics: OpenAI API (gpt-4o-mini), spaCy / NLTK
-Visualization: Matplotlib, Seaborn, Plotly
+Data Engineering: pandas
+AI & Semantics: OpenAI API (`gpt-4o-mini`)
+Visualization: Matplotlib, Seaborn
+
 
 
 
